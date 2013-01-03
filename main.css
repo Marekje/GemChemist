@@ -62,9 +62,19 @@
 
 /* @end */
 
+/* GENERAL & TYPOGRAPHY*/
+/* Stuff defining the page */
+body {
+	font-family: 'minion-pro', sans-serif;
+	
+	color: #EEEEEE;
+	background-color: #111111;
+}
 
-/* TYPOGRAPHY */
-/* Stuff that changes the text, how it's displayed */
+h1 {
+	font-size: 2em;
+	font-family: 'baroque-text', serif;
+}
 
 /* DISPOSITION */
 /* Stuff that changes the boxes, how it behaves. */

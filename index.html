@@ -7,10 +7,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
 	
-	<title>Miekje</title>
+	<title>GemChemist</title>
 	
-	<link rel="stylesheet" href="#" type="text/css" media="screen">
-	<link rel="stylesheet" href="#" type="text/css" media="print"/>
+	<!-- TYPEKIT scripts-->
+		<script type="text/javascript" src="//use.typekit.net/qfc3ekw.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	
+	<!-- STYLESHEETS -->
+	<link rel="stylesheet" href="main.css" type="text/css" media="screen">
+	
+	<!-- SCRIPTS -->
+	<script src="database.js" type="text/javascript"></script>
+	<script src="HTMLblocks.js" type="text/javascript"></script>
+	<script src="functions.js" type="text/javascript"></script>
 	
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,12 +31,63 @@
  <body>
  <!-- CONTENT -->
  	<div id="container">
- 	
+ 		
+ 	  <!-- Title -->
+ 		<header>
+ 			<h1>GemChemist</h1>
+ 			<h2>A Diablo III tool for Auction House Jewelers</h2>
+ 		</header>
+ 		
+ 	  <!-- Choice of start and end gem -->
+ 	  	<section id="gemchoicesection">
+	 		<form id="gemchoiceform" method="" action="">
+	 			<p>
+	 				<label for="startgemlevel">From </label>
+	 				<select name="startgemlevel" id="startgemlevel">
+	 					<option value="gem0">Gem 0</option>
+	 					<option value="gem1">Gem 1</option>
+	 				</select>
+	 				<label for="endgemlevel"> to </label>
+<!----> <!--The user shouldn't be able to select gems under the gem0 level-->
+	 				<select name="startgemlevel" id="startgemlevel">
+	 					<option value="gem0">Gem 0</option>
+	 					<option value="gem1">Gem 1</option>
+	 				</select>
+	 			</p>
+	 		</form>
+	 	</section>
+ 		
+ 	  <!-- Recipe -->
+ 		<section id="recipesection">
+ 			<h1>Recipe :</h1>
+ 			<p id="recipetext"></p>
+ 		</section>
+ 		
+ 	  <!-- Selling Price -->
+ 	  	<section id="sellingpricesection">
+ 	  		<form id="sellingpriceform" method="" action="">
+ 	  			<label for="sellingpriceinput">Selling Price :</label>
+ 	  			<input type="text" name="sellingpriceinput" value="" placeholder="How much ?"/>
+ 	  		</form>
+ 	  	</section>
+ 	  	
+	  <!-- Benefits -->
+	  	<section id="benefitssection">
+	  		<h1>Benefits :</h1>
+	  		<p>
+	  			<span id="benefitsnumber" class="answer"></span>
+	  			<span id="benefitspercent" class="answer"></span>
+	  		</p>
+	  	</section>
+	  	
+	  <!-- Footer -->
+	  	<footer>
+	  		<p>Made by Pierre Harlé in 2013</p>
+	  		<p>All this stuff is mine (unless specified), ask me for anything, I'll happily answer :-)</p>
+	  	</footer>
+ 		
+ 		
  	</div>
- 	
- <!-- TYPEKIT scripts-->
- 	<script type="text/javascript" src="//use.typekit.net/qfc3ekw.js"></script>
- 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
  	
  </body>
 

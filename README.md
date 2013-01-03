@@ -13,17 +13,17 @@ ____________________
 Files : 
 
 index.html
-main.css
-database.js
-HTMLblocks.js
-functions.js
-README.md
+	main.css
+	database.js
+	HTMLblocks.js
+	functions.js
+	README.md
 
 Folders :
-images
-	All gem images : gem-1, gem-2
-	All books images : book-1, book-2
-	Textures : texture-name
+	images
+		All gem images : gem-1, gem-2
+		All books images : book-1, book-2
+		Textures : texture-name
 	
 ____________________
 

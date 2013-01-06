@@ -1,28 +1,127 @@
 //Namespace : data
 var data = {
 	'items' : {
-		'page' : 'Page of Jewelcrafting',
-		'book' : 'Tome of JewelCrafting',
-		'secrets' : 'Tome of Secrets',
+		'page' : 	{ 'name' : 'Page of Jewelcrafting' },
+		'book' : 	{ 'name' : 'Tome of JewelCrafting' },
+		'secrets' : { 'name' : 'Tome of Secrets' },
 	},
 	
-	'gems' : ['Ruby', 'Amethyst', 'Emerald', 'Topaz'],
+	'gems' : {
+		'ruby' : 	 { 'name' : 'Ruby' },
+		'amethyst' : { 'name' : 'Amethyst' },
+		'emerald' :  { 'name' : 'Emerald' },
+		'topaz' : 	 { 'name' : 'Topaz' },
+	},
 	
-	'recipes' : [
+	'recipes' : {
 		/* Name, Number of previous gem, Gold, Books */
-		['Chipped'],
-		['Flawed', 2, 10, 0],
-		['Normal', 2, 25, 0],
-		['Flawless', 2, 40, 0],
-		['Perfect', 2, 55, 1, 'page'],
-		['Radiant', 2, 70, 1, 'page'],
-		['Square', 2, 85, 1, 'book'],
-		['Flawless Square', 2, 100, 1, 'book'],/* Highest drop level*/
-		['Perfect Square', 3, 30000, 3, 'secrets'],
-		['Radiant Square', 3, 50000, 6, 'secrets'],
-		['Star', 3, 80000, 9, 'secrets'],
-		['Flawless Square', 3, 100000, 12, 'secrets'],
-		['Perfect Star', 3, 200000, 15, 'secrets'],
-		['Radiant Star', 3, 400000, 20, 'secrets']
-	]
+		'chipped' : {
+			'name': 'Chipped',
+			'numPrev' : 0,
+			'goldCost' : 0,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 0 },
+		'flawed' : {
+			'name': 'Flawed',
+			'numPrev' : 2,
+			'goldCost' : 10,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 0 },
+		'normal' : {
+			'name': 'Normal',
+			'numPrev' : 2,
+			'goldCost' : 25,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 0 },
+		'flawless' : {
+			'name': 'Flawless',
+			'numPrev' : 2,
+			'goldCost' : 40,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 0 },
+		'perfect' : {
+			'name': 'Perfect',
+			'numPrev' : 2,
+			'goldCost' : 55,
+			'pages' : 1,
+			'books' : 0,
+			'secrets' : 0 },
+		'radiant' : {
+			'name': 'Radiant',
+			'numPrev' : 2,
+			'goldCost' : 70,
+			'pages' : 1,
+			'books' : 0,
+			'secrets' : 0 },
+		'square' : {
+			'name': 'Square',
+			'numPrev' : 2,
+			'goldCost' : 85,
+			'pages' : 0,
+			'books' : 1,
+			'secrets' : 0 },
+		'flawlessSquare' : { /* Highest drop level*/
+			'name': 'Flawless Square',
+			'numPrev' : 2,
+			'goldCost' : 100,
+			'pages' : 0,
+			'books' : 1,
+			'secrets' : 0 },
+		'perfectSquare' : { 
+			'name': 'Perfect Square',
+			'numPrev' : 3,
+			'goldCost' : 30000,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 3 },
+		'radiantSquare' : { 
+			'name': 'Radiant Square',
+			'numPrev' : 3,
+			'goldCost' : 50000,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 6 },
+		'star' : { 
+			'name': 'Star',
+			'numPrev' : 3,
+			'goldCost' : 80000,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 9 },
+		'flawlessStar' : { 
+			'name': 'Flawless Star',
+			'numPrev' : 3,
+			'goldCost' : 100000,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 12 },
+		'perfectStar' : { 
+			'name': 'Perfect Star',
+			'numPrev' : 3,
+			'goldCost' : 200000,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 15 },
+		'radiantStar' : { 
+			'name': 'Radiant Star',
+			'numPrev' : 3,
+			'goldCost' : 400000,
+			'pages' : 0,
+			'books' : 0,
+			'secrets' : 20 },
+	},
+	
+	'taxes' : { 'AHTax' : 15 }
 }
+
+
+
+
+
+
+
+

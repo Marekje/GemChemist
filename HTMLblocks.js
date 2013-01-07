@@ -1,7 +1,7 @@
 var HTMLblocks = {
 	label: function(forTarget, content) {
 		var label = document.createElement('label');
-			label.for = forTarget;
+			label.setAttribute('for', forTarget)
 			label.appendChild(document.createTextNode(content));
 		return label;
 	},

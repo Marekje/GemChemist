@@ -131,7 +131,7 @@ var gemC = {
 			var goldResult = document.createElement('span');
 				goldResult.className = 'goldresult';
 				goldResult.id = 'goldresult';
-				goldResult.innerText = golds + ' Gold pieces';
+				goldResult.innerText = golds.toFixed(0) + ' Gold pieces';
 			//var goldLabel = document.createTextNode(' Gold pieces');
 			
 			goldContent.appendChild(goldResult);
@@ -179,7 +179,7 @@ var gemC = {
 								
 				costResult = 0;
 				for (j=0; j<costCalcul.length; j++) { costResult += parseInt(costCalcul[j]); }
-				costContainer.innerHTML = costResult + ' Gold pieces';
+				costContainer.innerHTML = costResult.toFixed(0) + ' Gold pieces';
 				
 			}, false)
 		}
@@ -200,7 +200,7 @@ var gemC = {
 			var costResult = document.getElementById('costresult');
 			sellPrice = sellingPrice.value;
 			costNum = parseInt(costResult.innerHTML);
-			benefNum.innerHTML = (sellPrice - (sellPrice/100*data.taxes.AHTax)) - costNum + ' Gold pieces';
+			benefNum.innerHTML = ((sellPrice - (sellPrice/100*data.taxes.AHTax)) - costNum).toFixed(0) + ' Gold pieces';
 			/*benefPer.innerHTML = ;*/
 		}, false)
 	},

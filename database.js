@@ -2,7 +2,7 @@
 var data = {
 	'items' : {
 		'page' : 	{ 'name' : 'Page of Jewelcrafting' },
-		'book' : 	{ 'name' : 'Tome of JewelCrafting' },
+		'book' : 	{ 'name' : 'Tome of Jewelcrafting' },
 		'secrets' : { 'name' : 'Tome of Secrets' },
 	},
 	

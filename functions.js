@@ -44,11 +44,11 @@ var gemC = {
 		} else {
 			/* REVOIR LES FORMULES */
 			recipe.gemName  = startGem;
-			recipe.gemNum	= recipe.gemNum*data.recipes[endGem].numPrev;
 			recipe.goldCost += recipe.gemNum*data.recipes[endGem].goldCost;
 			recipe.pages	+= recipe.gemNum*data.recipes[endGem].pages;
 			recipe.books	+= recipe.gemNum*data.recipes[endGem].books;
 			recipe.secrets  += recipe.gemNum*data.recipes[endGem].secrets;
+			recipe.gemNum	= recipe.gemNum*data.recipes[endGem].numPrev;
 			return gemC.calcRecipe(startGem, nextEndGem, recipe);
 		}
 		
@@ -65,16 +65,26 @@ var gemC = {
 			var list = HTMLblocks.list('gemRecipe', 'recipe');
 				
 				var gemItem = HTMLblocks.listItem('');
-					gemItem.appendChild(gemC.AHinputHTML(this.gemNum, data.recipes[this.gemName].name, this.gemName));
+					gemItem.appendChild(gemC.AHinputHTML(this.gemNum, data.recipes[this.gemName].name + ' Gems', this.gemName));
+				list.appendChild(gemItem);
 				
-				var pageItem = HTMLblocks.listItem('');
-					pageItem.appendChild(gemC.AHinputHTML(this.pages, data.items.page.name, 'pages'));
-					
-				var bookItem = HTMLblocks.listItem('');
-					bookItem.appendChild(gemC.AHinputHTML(this.books, data.items.book.name, 'books'));
-					
-				var secretsItem = HTMLblocks.listItem('');
-					secretsItem.appendChild(gemC.AHinputHTML(this.secrets, data.items.secrets.name, 'secrets'));
+				if (this.pages !== 0 ) {
+					var pageItem = HTMLblocks.listItem('');
+						pageItem.appendChild(gemC.AHinputHTML(this.pages, data.items.page.name, 'pages'));
+					list.appendChild(pageItem);
+				}
+				
+				if (this.books !== 0 ) {
+					var bookItem = HTMLblocks.listItem('');
+						bookItem.appendChild(gemC.AHinputHTML(this.books, data.items.book.name, 'books'));
+					list.appendChild(bookItem);
+				}
+				
+				if (this.secrets !== 0) {		
+					var secretsItem = HTMLblocks.listItem('');
+						secretsItem.appendChild(gemC.AHinputHTML(this.secrets, data.items.secrets.name, 'secrets'));
+					list.appendChild(secretsItem);
+				}
 				
 				var golds = this.goldCost;
 				var goldItem = HTMLblocks.listItem(''); /* How much flouze ? */
@@ -83,10 +93,10 @@ var gemC = {
 				var costItem = HTMLblocks.listItem('');
 					costItem.appendChild(gemC.costHTML());
 				
-				list.appendChild(gemItem);
-				list.appendChild(pageItem);
+				
+				/*list.appendChild(pageItem);
 				list.appendChild(bookItem);
-				list.appendChild(secretsItem);
+				list.appendChild(secretsItem);*/
 				list.appendChild(goldItem);
 				list.appendChild(costItem);
 				
@@ -96,16 +106,17 @@ var gemC = {
 	/* Specific HTML blocks */
 	AHinputHTML: function(numObj, nameObj, classNameObj) {
 		var AHinputContent = document.createElement('p');
+			AHinputContent.className = 'itembox'
 			var numberOfObjects = document.createElement('span');
 				numberOfObjects.className = 'objectnumber';
 				numberOfObjects.innerText = numObj + ' ';
 				
-			var nameOfTheObject = document.createTextNode(nameObj);
+			var nameOfTheObject = document.createTextNode(nameObj + ' :');
 				
 			var nameOfObject = document.createElement('label');
 				nameOfObject.className = classNameObj;
 				
-			var input = HTMLblocks.input('text', 'costnumber', 'costnumber', 'AH price', false);
+			var input = HTMLblocks.input('text', 'costnumber', 'costnumber', 'AH price for them', false);
 			
 			AHinputContent.appendChild(nameOfObject);
 				nameOfObject.appendChild(numberOfObjects);
@@ -115,21 +126,27 @@ var gemC = {
 	},
 	goldHTML: function(golds) {
 		var goldContent = document.createElement('p');
+			goldContent.id = 'goldcontent';
+			goldContent.className = 'itembox';
 			var goldResult = document.createElement('span');
-				goldResult.className = 'goldresult costnumber';
-				goldResult.innerText = golds;
-			var goldLabel = document.createTextNode(' Gold pieces');
+				goldResult.className = 'goldresult';
+				goldResult.id = 'goldresult';
+				goldResult.innerText = golds + ' Gold pieces';
+			//var goldLabel = document.createTextNode(' Gold pieces');
 			
 			goldContent.appendChild(goldResult);
-			goldContent.appendChild(goldLabel);
+			//goldContent.appendChild(goldLabel);
 		return goldContent;
 	},
 	costHTML: function() {
 		var costContent = document.createElement('p');
+			costContent.className = 'resultscontent';
 			var costTitle = document.createElement('h1');
+				costTitle.className = 'resultstitle'
 				var costTitleContent = document.createTextNode('Cost : ');
 			var costSpan = document.createElement('span');
 				costSpan.id = 'costresult';
+				costSpan.className = 'answer';
 				
 			costContent.appendChild(costTitle);
 				costTitle.appendChild(costTitleContent);
@@ -145,39 +162,46 @@ var gemC = {
 	/* AddEventListeners */
 	calcCost: function() {
 		var costCalcul = [];
-		var costResult;
+		var costResult = 0;
 		
 		var costNumbers = document.getElementsByClassName('costnumber');
+		var goldNumber = parseInt(document.getElementById('goldresult').innerHTML);
+		var costContainer = document.getElementById('costresult');
+		
 		for (i=0; i<costNumbers.length; i++) {
 		
 			costNumbers[i].id = i;
 			costCalcul.push(0);
 			
 			costNumbers[i].addEventListener('keyup', function(e) {
-				costCalcul[this.id] = this.value;
-				console.log(costCalcul);
-				
-				for (j=0; j<costCalcul.length; j++) {
-					costResult += costCalcul[j];
-				}
+				if (this.value === '') { costCalcul[this.id] = 0 }
+				else { costCalcul[this.id] = parseInt(this.value) }
+								
+				costResult = 0;
+				for (j=0; j<costCalcul.length; j++) { costResult += parseInt(costCalcul[j]); }
+				costContainer.innerHTML = costResult + ' Gold pieces';
 				
 			}, false)
 		}
-		console.log(costCalcul);
 		
-		var costContainer = document.getElementById('costresult');
-		costContainer.innerHTML = costResult;
+		costCalcul.push(goldNumber);
+		console.log(costCalcul);
+		for (i=0; i<costCalcul.length; i++) {
+			costResult += costCalcul[i]
+		}
+		costContainer.innerHTML = costResult + ' Gold pieces';
 	},
-	
 	calcBenef: function() {
-		var sellPrice = document.getElementById('sellingpriceinput');
+		var sellingPrice = document.getElementById('sellingpriceinput');
 		var benefNum = document.getElementById('benefitsnumber');
 		var benefPer = document.getElementById('benefitspercent');
 		
-		sellPrice.addEventListener('keyup', function(e) {
-			price = sellPrice.value;
-			benefNum.innerHTML = price - (price/100*data.taxes.AHTax);
-			/*ADD BENEF PERCENTAGE IF THERE IS A COST SOMEWHERE*/
+		sellingPrice.addEventListener('keyup', function(e) {
+			var costResult = document.getElementById('costresult');
+			sellPrice = sellingPrice.value;
+			costNum = parseInt(costResult.innerHTML);
+			benefNum.innerHTML = (sellPrice - (sellPrice/100*data.taxes.AHTax)) - costNum + ' Gold pieces';
+			/*benefPer.innerHTML = ;*/
 		}, false)
 	},
 	

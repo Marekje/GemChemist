@@ -39,51 +39,51 @@
  		</header>
  		
  	  <!-- Choice of start and end gem -->
- 	  	<section id="gemchoicesection">
-	 		<p>
-	 			<label for="startgemlevel">From </label>
-	 			<select name="startgemlevel" id="startgemlevel">
-	 				<!-- Here goes startGems from Javascript -->
-	 			</select>
-	 			<label for="endgemlevel"> to </label>
-<!----> <!--The user shouldn't be able to select gems under the gem0 level-->
-	 			<select name="endgemlevel" id="endgemlevel">
-	 				<!-- Here goes endGems from Javascript -->
-				</select>
-	 		</p>
-	 	</section>
- 		
- 	  <!-- Recipe -->
- 		<section id="recipesection">
- 			<!--<h1>Recipe :</h1>-->
- 		</section>
- 		
- 	  <!-- Selling Price -->
- 	  	<section id="sellingpricesection">
- 	  		<label for="sellingpriceinput">Selling Price :</label>
- 	  		<input type="text" id='sellingpriceinput' name="sellingpriceinput" value="" placeholder="How much ?"/>
- 	  	</section>
- 	  	
-	  <!-- Benefits -->
-	  	<section id="benefitssection">
-	  		<h1>Benefits :</h1>
-	  		<ul>
-	  			<li><span id="benefitsnumber" class="answer">0</span> Gold</li>
-	  			<li><span id="benefitspercent" class="answer">unknown</span> %</li>
-	  		</ul>
-	  	</section>
-	  	
+ 	  	<div id="main">
+	 	  	<section id="gemchoicesection">
+		 		<p>
+		 			<label for="startgemlevel">From </label>
+		 			<select name="startgemlevel" id="startgemlevel">
+		 				<!-- Here goes startGems from Javascript -->
+		 			</select>
+		 			<label for="endgemlevel"> to </label>
+	<!----> <!--The user shouldn't be able to select gems under the gem0 level-->
+		 			<select name="endgemlevel" id="endgemlevel">
+		 				<!-- Here goes endGems from Javascript -->
+					</select>
+		 		</p>
+		 	</section>
+	 		
+	 	  <!-- Recipe -->
+	 		<section id="recipesection">
+	 			<!--<h1>Recipe :</h1>-->
+	 		</section>
+	 		
+	 	  <!-- Selling Price -->
+	 	  	<section id="benefitssection">
+	 	  		<p class="sellingpricebox">
+	 	  			<label for="sellingpriceinput">Selling Price :</label>
+	 	  			<input type="text" id='sellingpriceinput' name="sellingpriceinput" value="" placeholder="How much ?"/>
+	 	  		</p>
+				<div class="resultscontent">
+		  			<h1 class='resultstitle'>Benefits :</h1>
+		  			<!--<ul>
+		  				<li>--><span id="benefitsnumber" class="answer"></span><!--</li>
+		  				<li><span id="benefitspercent" class="answer"></span></li>-->
+		  			<!--</ul>-->
+		  		</div>
+		  	</section>
+	  	</div>
 	  <!-- Footer -->
 	  	<footer>
-	  		<p>Made by Pierre Harlé in 2013</p>
-	  		<p>All this stuff is mine (unless specified), ask me for anything, I'll happily answer :-)</p>
+	  		<p>Made by Marekje in 2013</p>
+	  		
 	  	</footer>
  		
  		<script type="text/javascript">
  			gemC.fillGemLists();
  			gemC.createRecipe();
  			gemC.gemsDetect();
- 			gemC.calcCost();
  			gemC.calcBenef();
  		</script>
  	</div>

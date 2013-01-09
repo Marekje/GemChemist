@@ -42,7 +42,6 @@ var gemC = {
 			recipe.gemName = startGem;
 			return recipe
 		} else {
-			/* REVOIR LES FORMULES */
 			recipe.gemName  = startGem;
 			recipe.goldCost += recipe.gemNum*data.recipes[endGem].goldCost;
 			recipe.pages	+= recipe.gemNum*data.recipes[endGem].pages;
@@ -104,7 +103,7 @@ var gemC = {
 			AHinputContent.className = 'itembox'
 			var numberOfObjects = document.createElement('span');
 				numberOfObjects.className = 'objectnumber';
-				numberOfObjects.innerText = numObj + ' ';
+				numberOfObjects.innerHTML = numObj + ' ';
 				
 			var nameOfTheObject = document.createTextNode(nameObj + ' :');
 				
@@ -126,7 +125,7 @@ var gemC = {
 			var goldResult = document.createElement('span');
 				goldResult.className = 'goldresult';
 				goldResult.id = 'goldresult';
-				goldResult.innerText = golds.toFixed(0) + ' ' + data.items.gold.nameFR;
+				goldResult.innerHTML = golds.toFixed(0) + ' ' + data.items.gold.nameFR;
 			
 			goldContent.appendChild(goldResult);
 		return goldContent;
@@ -199,7 +198,6 @@ var gemC = {
 		var costNumbers = document.getElementsByClassName('costnumber');
 		for (i=0; i<costNumbers.length; i++) {
 			costNumbers[i].addEventListener('keyup', gemC.calcBenefEvent, false);
-			console.log('Bla');
 		}
 	},
 	calcBenefEvent: function() {

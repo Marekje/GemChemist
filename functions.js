@@ -14,7 +14,7 @@ var gemC = {
 	fillGemList: function(container) {
 		for (var key in data.recipes) {
 		
-			var optContent = document.createTextNode(data.recipes[key].name);
+			var optContent = document.createTextNode(data.recipes[key].nameFR);
 			var newOption = HTMLblocks.option(key, optContent);
 			
 			if ( container.id === 'startgemlevel' && key === 'flawlessSquare')  { newOption.selected = true; }
@@ -65,38 +65,33 @@ var gemC = {
 			var list = HTMLblocks.list('gemRecipe', 'recipe');
 				
 				var gemItem = HTMLblocks.listItem('');
-					gemItem.appendChild(gemC.AHinputHTML(this.gemNum, data.recipes[this.gemName].name + ' Gems', this.gemName));
+					gemItem.appendChild(gemC.AHinputHTML(this.gemNum, ' * gemme ' + data.recipes[this.gemName].nameFR, this.gemName));
 				list.appendChild(gemItem);
 				
 				if (this.pages !== 0 ) {
 					var pageItem = HTMLblocks.listItem('');
-						pageItem.appendChild(gemC.AHinputHTML(this.pages, data.items.page.name, 'pages'));
+						pageItem.appendChild(gemC.AHinputHTML(this.pages, ' * ' + data.items.page.nameFR, 'pages'));
 					list.appendChild(pageItem);
 				}
 				
 				if (this.books !== 0 ) {
 					var bookItem = HTMLblocks.listItem('');
-						bookItem.appendChild(gemC.AHinputHTML(this.books, data.items.book.name, 'books'));
+						bookItem.appendChild(gemC.AHinputHTML(this.books, ' * ' + data.items.book.nameFR, 'books'));
 					list.appendChild(bookItem);
 				}
 				
 				if (this.secrets !== 0) {		
 					var secretsItem = HTMLblocks.listItem('');
-						secretsItem.appendChild(gemC.AHinputHTML(this.secrets, data.items.secrets.name, 'secrets'));
+						secretsItem.appendChild(gemC.AHinputHTML(this.secrets, ' * ' + data.items.secrets.nameFR, 'secrets'));
 					list.appendChild(secretsItem);
 				}
 				
-				var golds = this.goldCost;
 				var goldItem = HTMLblocks.listItem(''); /* How much flouze ? */
-					goldItem.appendChild(gemC.goldHTML(golds));
+					goldItem.appendChild(gemC.goldHTML(this.goldCost));
 				
 				var costItem = HTMLblocks.listItem('');
 					costItem.appendChild(gemC.costHTML());
 				
-				
-				/*list.appendChild(pageItem);
-				list.appendChild(bookItem);
-				list.appendChild(secretsItem);*/
 				list.appendChild(goldItem);
 				list.appendChild(costItem);
 				
@@ -116,7 +111,7 @@ var gemC = {
 			var nameOfObject = document.createElement('label');
 				nameOfObject.className = classNameObj;
 				
-			var input = HTMLblocks.input('text', 'costnumber', 'costnumber', 'AH price for them', false);
+			var input = HTMLblocks.input('text', 'costnumber', 'costnumber', 'Prix unitaire', false);
 			
 			AHinputContent.appendChild(nameOfObject);
 				nameOfObject.appendChild(numberOfObjects);
@@ -131,11 +126,9 @@ var gemC = {
 			var goldResult = document.createElement('span');
 				goldResult.className = 'goldresult';
 				goldResult.id = 'goldresult';
-				goldResult.innerText = golds.toFixed(0) + ' Gold pieces';
-			//var goldLabel = document.createTextNode(' Gold pieces');
+				goldResult.innerText = golds.toFixed(0) + ' ' + data.items.gold.nameFR;
 			
 			goldContent.appendChild(goldResult);
-			//goldContent.appendChild(goldLabel);
 		return goldContent;
 	},
 	costHTML: function() {
@@ -143,7 +136,7 @@ var gemC = {
 			costContent.className = 'resultscontent';
 			var costTitle = document.createElement('h1');
 				costTitle.className = 'resultstitle'
-				var costTitleContent = document.createTextNode('Cost : ');
+				var costTitleContent = document.createTextNode(data.translations.cost.nameFR + ' : ');
 			var costSpan = document.createElement('span');
 				costSpan.id = 'costresult';
 				costSpan.className = 'answer';
@@ -174,12 +167,13 @@ var gemC = {
 			costCalcul.push(0);
 			
 			costNumbers[i].addEventListener('keyup', function(e) {
+				var number = this.parentNode.querySelector('.objectnumber').innerHTML;
 				if (this.value === '') { costCalcul[this.id] = 0 }
-				else { costCalcul[this.id] = parseInt(this.value) }
+				else { costCalcul[this.id] = parseInt(this.value)*number }
 								
 				costResult = 0;
 				for (j=0; j<costCalcul.length; j++) { costResult += parseInt(costCalcul[j]); }
-				costContainer.innerHTML = costResult.toFixed(0) + ' Gold pieces';
+				costContainer.innerHTML = costResult.toFixed(0) + ' ' + data.items.gold.nameFR;
 				
 			}, false)
 		}
@@ -189,20 +183,40 @@ var gemC = {
 		for (i=0; i<costCalcul.length; i++) {
 			costResult += costCalcul[i]
 		}
-		costContainer.innerHTML = costResult + ' Gold pieces';
+		costContainer.innerHTML = costResult + ' ' + data.items.gold.nameFR;
 	},
 	calcBenef: function() {
 		var sellingPrice = document.getElementById('sellingpriceinput');
+		var costNum = document.getElementById('costresult');
+		
 		var benefNum = document.getElementById('benefitsnumber');
 		var benefPer = document.getElementById('benefitspercent');
 		
-		sellingPrice.addEventListener('keyup', function(e) {
-			var costResult = document.getElementById('costresult');
-			sellPrice = sellingPrice.value;
-			costNum = parseInt(costResult.innerHTML);
-			benefNum.innerHTML = ((sellPrice - (sellPrice/100*data.taxes.AHTax)) - costNum).toFixed(0) + ' Gold pieces';
-			/*benefPer.innerHTML = ;*/
-		}, false)
+		//var sellResult, costResult;
+		
+		sellingPrice.addEventListener('keyup', gemC.calcBenefEvent, false);
+		
+		var costNumbers = document.getElementsByClassName('costnumber');
+		for (i=0; i<costNumbers.length; i++) {
+			costNumbers[i].addEventListener('keyup', gemC.calcBenefEvent, false);
+			console.log('Bla');
+		}
+	},
+	calcBenefEvent: function() {
+		var sellingPrice = document.getElementById('sellingpriceinput');
+		var costNum = document.getElementById('costresult');
+		var benefNum = document.getElementById('benefitsnumber');
+		var benefPer = document.getElementById('benefitspercent');
+		var sellResult, costResult;
+	
+		if (!isNaN(parseInt(sellingPrice.value))) { sellResult = parseInt(sellingPrice.value); }
+		else { sellResult = 0; }
+		
+		if (!isNaN(parseInt(costNum.innerHTML))) { costResult = parseInt(costNum.innerHTML) }
+		else { costResult = 0; }
+		
+		var benefResult = ((sellResult - (sellResult/100*data.taxes.AHTax)) - costResult ).toFixed(0) + ' ' + data.items.gold.nameFR;
+		benefNum.innerHTML = benefResult;	
 	},
 	
 	gemsDetect: function() {
